@@ -48,6 +48,7 @@ var SPI = require('pi-spi');
 var spi = SPI.initialize("/dev/spidev0.0");
 var instruction = Buffer([ 0x01, 0x80, 0x00]);  //0000 0001 1000 0000 0000 0000
 var last = 0;
+var changed=false;
 
 setInterval(function(e){ 
 
@@ -60,7 +61,14 @@ setInterval(function(e){
     last = val;
 
     if(Math.abs(change) > CHANGE){
-	sleep.sleep(5);
+      changed=true;
+      sleep.sleep(5);
+      return;
+    }
+    
+    if(changed){
+	changed=false;
+        console.log("detected change, using " + val + " ohms");
         if(val >= GREENMIN){
   	  console.log("Milk is full");
 	  badge(99);

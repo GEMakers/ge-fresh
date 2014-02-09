@@ -1,0 +1,12 @@
+{
+  "name": "milkminder",
+  "description": "Notify a consumer when they're low on milk.",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "*",
+    "pi-spi": "*",
+    "pi-gpio": "*",
+    "sleep": "*"
+  }
+}
